@@ -69,7 +69,10 @@ def zone_get(hetzner_dns_token=None,
     if (zone_name or 'ZONE_NAME' in os.environ) and zone_id is None:
 
         # get list of zones
-        response_dict = zone_list()
+        if hetzner_dns_token:
+            response_dict = zone_list(hetzner_dns_token)        
+        else:
+            response_dict = zone_list()
 
         # check response for errors
         helpers.check_response_for_errors(response_dict)
